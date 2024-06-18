@@ -6,54 +6,59 @@
 //
 
 import SwiftUI
-
-struct Response: Codable {
-    var results: [Result]
-}
-
-struct Result: Codable {
-    var trackId: Int
-    var trackName: String
-    var collectionName: String
-}
+import CoreHaptics
 
 struct ContentView: View {
-    @State private var results = [Result]()
+    @State private var engine: CHHapticEngine?
     
     var body: some View {
-        NavigationStack {
-            List(results, id: \.trackId) { item in
-                VStack(alignment: .leading) {
-                    Text(item.trackName)
-                        .font(.headline)
-                    Text(item.collectionName)
-                }
-            }
-            .navigationTitle("Taylor Swift")
+        Button {
+            complexSuccess()
+        } label: {
+            Image(systemName: "aqi.medium")
+                .font(.system(size: 100))
         }
-        .listStyle(.plain)
-        .task {
-            await loadData()
+        .onAppear(perform: prepareHaptics)
+    }
+    
+    func prepareHaptics() {
+        guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
+
+        do {
+            engine = try CHHapticEngine()
+            try engine?.start()
+        } catch {
+            print("There was an error creating the engine: \(error.localizedDescription)")
         }
     }
     
-    func loadData() async {
-        guard let url = URL(string: "https://itunes.apple.com/search?term=taylor+swift&entity=song") else {
-            print("Invalid URL")
-            return
+    func complexSuccess() {
+        // make sure that the device supports haptics
+        guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
+        var events = [CHHapticEvent]()
+
+        // create one intense, sharp tap
+        for i in stride(from: 0, to: 1, by: 0.1) {
+            let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: Float(i))
+            let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: Float(i))
+            let event = CHHapticEvent(eventType: .hapticTransient, parameters: [intensity, sharpness], relativeTime: i)
+            events.append(event)
         }
-        
+
+//        for i in stride(from: 0, to: 1, by: 0.1) {
+//            let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: Float(1 - i))
+//            let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: Float(1 - i))
+//            let event = CHHapticEvent(eventType: .hapticTransient, parameters: [intensity, sharpness], relativeTime: 1 + i)
+//            events.append(event)
+//        }
+
+        // convert those events into a pattern and play it immediately
         do {
-            let (data, _) = try await URLSession.shared.data(from: url)
-            if let decodedResponse = try? JSONDecoder().decode(Response.self, from: data) {
-                results = decodedResponse.results
-            }
+            let pattern = try CHHapticPattern(events: events, parameters: [])
+            let player = try engine?.makePlayer(with: pattern)
+            try player?.start(atTime: 0)
         } catch {
-            print("Invalid URL")
+            print("Failed to play pattern: \(error.localizedDescription).")
         }
     }
-}
-
-#Preview {
-    ContentView()
 }
