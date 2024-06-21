@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D1B0C0AB2C2581BF0042F9E5 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B0C0AA2C2581BF0042F9E5 /* Order.swift */; };
+		D1B0C0AD2C258ADF0042F9E5 /* AddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B0C0AC2C258ADF0042F9E5 /* AddressView.swift */; };
 		D1DC502E2C203D9500BCADE5 /* CupcakeCornerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DC502D2C203D9500BCADE5 /* CupcakeCornerApp.swift */; };
 		D1DC50302C203D9500BCADE5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DC502F2C203D9500BCADE5 /* ContentView.swift */; };
 		D1DC50322C203D9600BCADE5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1DC50312C203D9600BCADE5 /* Assets.xcassets */; };
@@ -16,6 +17,7 @@
 
 /* Begin PBXFileReference section */
 		D1B0C0AA2C2581BF0042F9E5 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+		D1B0C0AC2C258ADF0042F9E5 /* AddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressView.swift; sourceTree = "<group>"; };
 		D1DC502A2C203D9500BCADE5 /* CupcakeCorner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CupcakeCorner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1DC502D2C203D9500BCADE5 /* CupcakeCornerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CupcakeCornerApp.swift; sourceTree = "<group>"; };
 		D1DC502F2C203D9500BCADE5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -55,6 +57,7 @@
 			children = (
 				D1DC502D2C203D9500BCADE5 /* CupcakeCornerApp.swift */,
 				D1DC502F2C203D9500BCADE5 /* ContentView.swift */,
+				D1B0C0AC2C258ADF0042F9E5 /* AddressView.swift */,
 				D1B0C0AA2C2581BF0042F9E5 /* Order.swift */,
 				D1DC50312C203D9600BCADE5 /* Assets.xcassets */,
 				D1DC50332C203D9600BCADE5 /* Preview Content */,
@@ -141,6 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D1B0C0AB2C2581BF0042F9E5 /* Order.swift in Sources */,
+				D1B0C0AD2C258ADF0042F9E5 /* AddressView.swift in Sources */,
 				D1DC50302C203D9500BCADE5 /* ContentView.swift in Sources */,
 				D1DC502E2C203D9500BCADE5 /* CupcakeCornerApp.swift in Sources */,
 			);
