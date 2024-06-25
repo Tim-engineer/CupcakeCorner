@@ -70,4 +70,22 @@ class Order: Codable {
 
         return cost
     }
+    
+    // Save to UserDefaults
+        func saveToUserDefaults() {
+            let defaults = UserDefaults.standard
+            defaults.set(name, forKey: "name")
+            defaults.set(streetAddress, forKey: "streetAddress")
+            defaults.set(city, forKey: "city")
+            defaults.set(zip, forKey: "zip")
+        }
+        
+        // Load from UserDefaults
+        func loadFromUserDefaults() {
+            let defaults = UserDefaults.standard
+            name = defaults.string(forKey: "name") ?? ""
+            streetAddress = defaults.string(forKey: "streetAddress") ?? ""
+            city = defaults.string(forKey: "city") ?? ""
+            zip = defaults.string(forKey: "zip") ?? ""
+        }
 }

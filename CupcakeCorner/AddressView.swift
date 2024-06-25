@@ -14,9 +14,13 @@ struct AddressView: View {
         Form {
             Section {
                 TextField("Name", text: $order.name)
+                    .onChange(of: order.name) { order.saveToUserDefaults() }
                 TextField("Street Address", text: $order.streetAddress)
+                    .onChange(of: order.streetAddress) { order.saveToUserDefaults() }
                 TextField("City", text: $order.city)
+                    .onChange(of: order.city) { order.saveToUserDefaults() }
                 TextField("Zip", text: $order.zip)
+                    .onChange(of: order.zip) { order.saveToUserDefaults() }
             }
             
             Section {
@@ -28,6 +32,7 @@ struct AddressView: View {
         }
         .navigationTitle("Delivery details")
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear(perform: order.loadFromUserDefaults)
     }
 }
 
